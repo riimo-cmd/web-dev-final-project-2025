@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root{
+    --peach:rgb(255, 205, 129);
+    --black: rgb(19, 17, 15);
+    --white: rgb(255, 252, 250);
+}
+
+body{
+    margin: 0 auto;
+    width: 90%;
+    display: grid;
+    grid-template-rows: 2em 3.5em 150vh 3.5em;
+    grid-template-columns:  65vw 23vw;
+    font-family: "Josefin Sans", Ariel, sans-serif;
+    column-gap: 1.5em;
+    background: var(--white);
+    text-color: var(--black);
+
+}
+
+h1{
+    font-size: 2em;
+}
+
+header{
+    grid-row: 1/3;
+    grid-column: 1/3;
+    padding-top: 1em;
+}
+
+nav{
+    width: fit-content;
+}
+
+nav ul, footer ul{
+    list-style: none;
+    width: fit-content;
+    padding: 0;
+    margin: 0 auto;
+}
+
+nav li, footer li{
+    display: inline;
+    font-size: 1.5em;
+    padding-right: .75em;
+}
+
+nav li:last-child, footer li:last-child{
+    padding-right: 0;
+}
+
+nav li a{
+    font-size: 1.5em;
+}
+
+
+main{
+    grid-row: 3/4;
+    grid-column: 1/2;
+}
+
+
+aside{
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+
+footer{
+    grid-row: 4/5;
+    grid-column: 1/3;
+}
+
+footer p{
+    text-align: center;
+    margin: .5em auto;
+}
+
+header img{
+    height: 2em;
+}
+
+h1{
+    display: inline;
+}
+
+nav{
+    float: right;
+    float: bottom;
+    padding-top: .7em;
+}
+
+nav ul{
+    margin: 0;
+}
+
+nav li a{
+    font-size: 1em;
+}
+
+
+.newsletter{
+    background: var(--peach);
+    padding: .5em 0;
+}
+
+form h2, form p{
+    width: fit-content;
+    margin: .5em auto;
+}
+
+#newsletter-submit{
+    display: block;
+    margin: .25em auto;
+}
+
+p {
+    /*Trick I like to do for readibility.
+    Makes paragraphs too small for desktops. 
+    Add to mobile format?*/
+    /*width: clamp(40ch, 20%, 75ch);*/
+}

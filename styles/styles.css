@@ -1,74 +1,139 @@
 
+
+/*TODO: Not make it look like allrecipes circa 2010.*/
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root{
     --peach:rgb(255, 205, 129);
+    --black: rgb(19, 17, 15);
+    --white: rgb(255, 252, 250);
+    --orange:rgba(255, 154, 85, .9);
+    --yellow:rgba(254, 236, 138, .45);
 }
 
 body{
     margin: 0 auto;
-    width: 75%;
+    width: 90%;
     display: grid;
-    grid-template-rows: 8em 3.5em 150vh 3.5em;
-    grid-template-columns:  50vw 25vw;
+    grid-template-rows: 2em 3.5em 7em 150vh 3.5em;
+    grid-template-columns:  65vw 23vw;
     font-family: "Josefin Sans", Ariel, sans-serif;
+    column-gap: 1.5em;
+    background: var(--white);
+    text-color: var(--black);
+
 }
 
 h1{
-    display: none;
+    font-size: 2em;
 }
 
-#logo{
-    grid-row: 1/2;
+header{
+    grid-row: 1/3;
     grid-column: 1/3;
+    padding-top: 1em;
 }
 
-#navbar{
-    grid-row: 2/3;
-    grid-column: 1/3;
-    border-top: .33em solid var(--peach);
-    border-bottom: .33em solid var(--peach);
+nav{
+    width: fit-content;
 }
 
-#navbar ul, footer ul{
+nav ul, footer ul{
     list-style: none;
     width: fit-content;
     padding: 0;
     margin: 0 auto;
 }
 
-#navbar li, footer li{
+nav li, footer li{
     display: inline;
     font-size: 1.5em;
-    padding-right: 1.5em;
+    padding-right: .75em;
 }
 
-#navbar li:last-child, footer li:last-child{
+nav li:last-child, footer li:last-child{
     padding-right: 0;
 }
 
-#navbar li a{
+nav li a{
     font-size: 1.5em;
 }
 
+.section-header{
+    background-image: url("../images/orangebg.webp");
+    background-color: #ff9a55;
+    background: linear-gradient(111deg, var(--orange) 0%, var(--peach) 33%, var(--white) 75%);
+    grid-row: 3/4;
+    grid-column: 1/3;
+    display:block;
+    height: 4em;
+    margin: 1em 0;
+    padding: 0 1em;
+    
+}
 
 main{
-    grid-row: 3/4;
+    grid-row: 4/5;
     grid-column: 1/2;
 }
 
 
 aside{
-    grid-row: 3/4;
+    grid-row: 4/5;
     grid-column: 2/3;
 }
 
 footer{
-    grid-row: 4/5;
+    grid-row: 5/6;
     grid-column: 1/3;
 }
 
 footer p{
     text-align: center;
     margin: .5em auto;
+}
+
+header img{
+    height: 2em;
+}
+
+h1{
+    display: inline;
+}
+
+nav{
+    float: right;
+    float: bottom;
+    padding-top: .7em;
+}
+
+nav ul{
+    margin: 0;
+}
+
+nav li a{
+    font-size: 1em;
+}
+
+
+.newsletter{
+    background: var(--peach);
+    padding: .5em 0;
+}
+
+form h2, form p{
+    width: fit-content;
+    margin: .5em auto;
+}
+
+#newsletter-submit{
+    display: block;
+    margin: .25em auto;
+}
+
+p {
+    /*Trick I like to do for readibility.
+    Makes paragraphs too small for desktops. 
+    Add to mobile format?*/
+    /*width: clamp(40ch, 20%, 75ch);*/
 }

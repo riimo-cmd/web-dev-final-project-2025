@@ -75,6 +75,7 @@ nav li a{
 main{
     grid-row: 4/5;
     grid-column: 1/2;
+    padding: .75em;
 }
 
 

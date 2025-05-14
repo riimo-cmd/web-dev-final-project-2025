@@ -16,7 +16,7 @@
     <div class="section-header" id="section-header">
       <h2>Appetizers</h2>
     </div>
-    <main>
+    <main id="main">
       <article>
         <h3>Test Recipe #1</h3>
         <a href="#recipe"><button>Jump to Recipe</button></a>
@@ -61,10 +61,14 @@
       </article>
       <div class="recipeBox" id="recipeForm">
         <h3>Submit Your Recipe!</h3>
-        <div><label for="recipie-title">Title:</label> <input id="recipie-title" name="recipie-title" type="text"></div>
-        <div><label for="recipie-desc">Description:</label> <input id="recipie-desc" name="recipie-desc" type="text"></div>
-        <div><label for="recipie-prep-time">Prep Time:</label> <input id="recipie-prep-time" name="recipie-prep-time" type="number"></div>
-        <div><label for="recipie-cook-time">Cook Time:</label> <input id="recipie-cook-time" name="recipie-cook-time" type="number"></div>
+        <div><label for="recipe-title">Title:</label> <input id="recipe-title" name="recipe-title" type="text"></div>
+        <div><label for="recipe-desc">Description:</label> <input id="recipe-desc" name="recipe-desc" type="text"></div>
+        <div><label for="recipe-prep-time">Prep Time:</label> <input id="recipe-prep-time" name="recipe-prep-time" type="number" required></div>
+        <div><label for="recipe-cook-time">Cook Time:</label> <input id="recipe-cook-time" name="recipe-cook-time" type="number" required></div>
+        <div id="ingredient-1"><label for="recipe-ingredient-1">Ingredient #1:</label> <input id="recipe-ingredient-1" name="recipe-ingredient-1" type="text" required> </div>
+        <button id="ingredient-btn">Add Another Ingredient</button></button> <button id="ingredient-remover">Remove Previous Ingredient</button></button>
+        <div id="steps-1"><label for="recipe-steps-1">Step 1:</label> <input id="recipe-steps-1" name="recipe-steps-1" type="text" required> </div>
+        <button id="steps-btn">Add Another Step</button></button> <button id="steps-remover">Remove Previous Step</button></button>
         <input id="recipe-submit" type="submit" value="Submit">
       </form>
     </main>

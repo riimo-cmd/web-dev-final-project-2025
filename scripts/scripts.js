@@ -15,33 +15,29 @@ let newsletterSubmitBtn = document.getElementById("newsletter-submit");
 let newsletter = document.getElementById("newsletter")
 let submitted = false;
 
-let firstName = localStorage.getItem("firstNameBox");
-let email = localStorage.getItem("emailBox");
-
-let welcomeTemplate = `<h3>Thanks for subscribing ${firstName}!</h3><p>A confirmation email will be sent to ${email} soon. Make sure to check your spam folder if you can't find it - sometimes letters get lost!`;
+let firstName = localStorage.getItem("name");
+let email = localStorage.getItem("email");
 
 newsletterSubmitBtn.addEventListener("click", () => {
-    localStorage.setItem(firstNameBox.name, firstName.value);
-    localStorage.setItem(emailBox.name, firstName.value);
-    
+  firstName = firstNameBox.value;
+  email = emailBox.value;
+  
+  let welcomeTemplate = `<h3>Thanks for subscribing ${firstName}!</h3><p>A confirmation email will be sent to ${email} soon. Make sure to check your spam folder if you can't find it - sometimes letters get lost!`;
+  
+  localStorage.setItem("name", firstName.value);
+  localStorage.setItem("email", firstName.value);
     newsletter.innerHTML = "";
     newsletter.insertAdjacentHTML("beforeend", welcomeTemplate);
 });
+
+if(firstName != null && email != null) {
+  newsletter.innerHTML = `<h3>Looks like you're subscribed!</h3><p>Make sure to keep an eye on your email for all our delicious recipes.</p>`;
+}
 
 
 /** TODO: Custom object
  * review chapter 8
 */
-
-//stores all submitted recipes. the default values are all placeholders.
-let recipeTemplate  = { 
-    title: ["Title"],
-    description: ["onion onion onion onion. onion onion? onion! onion."],
-    prepTime: [0],
-    cookTime: [0],
-    ingredients: [`<li>onion</li>`],
-    steps: [`<li>cook onion</li`]
-};
 
 let recipeSubmitBtn = document.getElementById("recipe-submit");
 let newTitle = document.getElementById("recipe-title");
@@ -74,7 +70,7 @@ function recipeSubmit(){
       currentStep = document.getElementById("recipe-steps-" + i);
       stepsList += `<li>` + currentStep.value + `</li>`;
     }
-
+    
     let recipeHTML = `
     <article>
         <h3>${newTitle.value}</h3>
@@ -104,14 +100,6 @@ function recipeSubmit(){
     main.insertAdjacentHTML("afterbegin", recipeHTML);
     submittedRecipes++;
 
-
-
-    localStorage.setItem("title" + submittedRecipes, newTitle.value);
-    localStorage.setItem("desc" + submittedRecipes, newDesc.value);
-    localStorage.setItem("prepTime" + submittedRecipes, newPrepTime.value);
-    localStorage.setItem("cookTime" + submittedRecipes, newCookTime.value);
-    localStorage.setItem("ingredients" + submittedRecipes, ingredientsList);
-    localStorage.setItem("steps" + submittedRecipes, stepsList);
 
 }
 
@@ -195,39 +183,4 @@ stepsRemove.addEventListener("click", () => {
     }
 });
 
-/** grabs the recipes from local storage and posts them 
- * 
-*/
-document.addEventListener("onload", () => {
-  for (let i = 1; i <= submittedRecipes; i++){
-    console.log(i); 
-    let recipeHTML = `
-    <article>
-        <h3>${localStorage.getItem("title" + i)}</h3>
-        <a href="#recipe-${i}"><button>Jump to Recipe</button></a>
-        <div class="blog-post">
-        <p>${localStorage.getItem("desc" + i)}</p>
-        <p><b>Prep Time:</b> ${localStorage.getItem("prepTime" + i)} minutes</p>
-        <p><b>Cook Time:</b> ${localStorage.getItem("cookTime" + i)} minutes</p>
-        <p><b>Total:</b> ${parseInt(localStorage.getItem("prepTime" + i)) + parseInt(localStorage.getItem("cookTime" + i))} minutes</p>
-        </div>
-        <div class="recipe" id="recipe-${i}">
-          <div class="ingredients">
-            <h4>Ingredients</h4>
-            <ul>
-              ${localStorage.getItem("ingredients" + i)}
-            </ul>
-          </div>
-          <div class="steps">
-            <h4>Directions</h4>
-            <ol>
-              ${localStorage.getItem("steps" + i)}
-            </ol>
-          </div>
-        </div>
-      </article>`;
-
-    main.insertAdjacentHTML("afterbegin", recipeHTML);
-  }
-});
 

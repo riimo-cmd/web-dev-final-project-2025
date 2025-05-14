@@ -159,6 +159,10 @@ form h3, form p{
     margin: .25em auto;
 }
 
+#newsletter p{
+    padding: 1em;
+}
+
 .recipe-box{
     background: var(--peach);
     border-radius: 2em;

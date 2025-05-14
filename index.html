@@ -59,16 +59,16 @@
           </div>
         </div>
       </article>
-      <div class="recipeBox" id="recipeForm">
+      <form class="recipe-box" id="recipeForm">
         <h3>Submit Your Recipe!</h3>
         <div><label for="recipe-title">Title:</label> <input id="recipe-title" name="recipe-title" type="text"></div>
         <div><label for="recipe-desc">Description:</label> <input id="recipe-desc" name="recipe-desc" type="text"></div>
         <div><label for="recipe-prep-time">Prep Time:</label> <input id="recipe-prep-time" name="recipe-prep-time" type="number" required></div>
         <div><label for="recipe-cook-time">Cook Time:</label> <input id="recipe-cook-time" name="recipe-cook-time" type="number" required></div>
         <div id="ingredient-1"><label for="recipe-ingredient-1">Ingredient #1:</label> <input id="recipe-ingredient-1" name="recipe-ingredient-1" type="text" required> </div>
-        <button id="ingredient-btn">Add Another Ingredient</button></button> <button id="ingredient-remover">Remove Previous Ingredient</button></button>
+        <button id="ingredient-btn">Add Another Ingredient</button><button id="ingredient-remover">Remove Previous Ingredient</button></button>
         <div id="steps-1"><label for="recipe-steps-1">Step 1:</label> <input id="recipe-steps-1" name="recipe-steps-1" type="text" required> </div>
-        <button id="steps-btn">Add Another Step</button></button> <button id="steps-remover">Remove Previous Step</button></button>
+        <button id="steps-btn">Add Another Step</button><button id="steps-remover">Remove Previous Step</button></button>
         <input id="recipe-submit" type="submit" value="Submit">
       </form>
     </main>
@@ -76,7 +76,7 @@
         <!--TODO: add this to links.js ONLY after writing the script to handle the form input and (mostly) finishing the css.-->
         <form class="newsletter" id="newsletter">
             <h3>Join Our Newsletter!</h3>
-            <p class="newsletter-blurb">Let's go, let's go-</p>
+            <p class="newsletter-blurb">Get the latest recipes and cooking tips directly into your inbox</p>
             <label for="name">Name:</label>
             <input id="name" name="name" type="text"><br>
             <label for="newsletter-email" name="email">Email:</label>

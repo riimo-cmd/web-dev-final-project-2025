@@ -28,6 +28,14 @@ h1{
     font-size: 2em;
 }
 
+h2{
+    font-size: 1.75em;
+}
+
+h3{
+    font-size: 1.5em;
+}
+
 header{
     grid-row: 1/3;
     grid-column: 1/3;
@@ -70,6 +78,25 @@ nav li a{
     margin: 1em 0;
     padding: 0 1em;
     
+}
+
+button, #recipe-submit, #newsletter-submit{
+    background-color: var(--orange);
+    border: 0;
+    border-radius: 2em;
+    color: var(--white);
+    padding: .75em;
+    font-family:  "Josefin Sans", Ariel, sans-serif;
+    font-weight: bold;
+    font-size: .9em;
+}
+
+form button, #recipe-submit, #newsletter-submit{
+    background-color: var(--orange);
+    padding: .5em .75em;
+    font-size: .75em;
+    font-weight: normal;
+    margin: .5em;
 }
 
 main{
@@ -123,9 +150,8 @@ nav li a{
     padding: .5em 0;
 }
 
-form h2, form p{
-    width: fit-content;
-    margin: .5em auto;
+form h3, form p{
+    text-align: center;
 }
 
 #newsletter-submit{
@@ -133,9 +159,18 @@ form h2, form p{
     margin: .25em auto;
 }
 
-p {
+.recipe-box{
+    background: var(--peach);
+    border-radius: 2em;
+    padding: .5em 1em;
+    margin: 0 auto;
+}
+
+p, ul, li {
     /*Trick I like to do for readibility.
     Makes paragraphs too small for desktops. 
     Add to mobile format?*/
     /*width: clamp(40ch, 20%, 75ch);*/
+    font-size: 1em;
+    margin: .75em 0;
 }

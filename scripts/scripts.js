@@ -33,13 +33,14 @@ newsletterSubmitBtn.addEventListener("click", () => {
  * review chapter 8
 */
 
-let recipeTemplate  = {
+//stores all submitted recipes. the default values are all placeholders.
+let recipeTemplate  = { 
     title: ["Title"],
     description: ["onion onion onion onion. onion onion? onion! onion."],
     prepTime: [0],
     cookTime: [0],
-    ingredients: ["onion", "onion", "onion"],
-    steps: ["dice onion", "saute onion", "appreciate onion", "become onion", "make obligatory shrek joke"]
+    ingredients: [`<li>onion</li>`],
+    steps: [`<li>cook onion</li`]
 };
 
 let recipeSubmitBtn = document.getElementById("recipe-submit");
@@ -74,7 +75,6 @@ function recipeSubmit(){
       stepsList += `<li>` + currentStep.value + `</li>`;
     }
 
-
     let recipeHTML = `
     <article>
         <h3>${newTitle.value}</h3>
@@ -104,6 +104,14 @@ function recipeSubmit(){
     main.insertAdjacentHTML("afterbegin", recipeHTML);
     submittedRecipes++;
 
+
+
+    localStorage.setItem("title" + submittedRecipes, newTitle.value);
+    localStorage.setItem("desc" + submittedRecipes, newDesc.value);
+    localStorage.setItem("prepTime" + submittedRecipes, newPrepTime.value);
+    localStorage.setItem("cookTime" + submittedRecipes, newCookTime.value);
+    localStorage.setItem("ingredients" + submittedRecipes, ingredientsList);
+    localStorage.setItem("steps" + submittedRecipes, stepsList);
 
 }
 
@@ -186,3 +194,40 @@ stepsRemove.addEventListener("click", () => {
       stepsRemove.insertAdjacentHTML("afterend", stepsErrorMsg);
     }
 });
+
+/** grabs the recipes from local storage and posts them 
+ * 
+*/
+document.addEventListener("onload", () => {
+  for (let i = 1; i <= submittedRecipes; i++){
+    console.log(i); 
+    let recipeHTML = `
+    <article>
+        <h3>${localStorage.getItem("title" + i)}</h3>
+        <a href="#recipe-${i}"><button>Jump to Recipe</button></a>
+        <div class="blog-post">
+        <p>${localStorage.getItem("desc" + i)}</p>
+        <p><b>Prep Time:</b> ${localStorage.getItem("prepTime" + i)} minutes</p>
+        <p><b>Cook Time:</b> ${localStorage.getItem("cookTime" + i)} minutes</p>
+        <p><b>Total:</b> ${parseInt(localStorage.getItem("prepTime" + i)) + parseInt(localStorage.getItem("cookTime" + i))} minutes</p>
+        </div>
+        <div class="recipe" id="recipe-${i}">
+          <div class="ingredients">
+            <h4>Ingredients</h4>
+            <ul>
+              ${localStorage.getItem("ingredients" + i)}
+            </ul>
+          </div>
+          <div class="steps">
+            <h4>Directions</h4>
+            <ol>
+              ${localStorage.getItem("steps" + i)}
+            </ol>
+          </div>
+        </div>
+      </article>`;
+
+    main.insertAdjacentHTML("afterbegin", recipeHTML);
+  }
+});
+

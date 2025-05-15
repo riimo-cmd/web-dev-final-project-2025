@@ -17,55 +17,22 @@
       <h2>All Our Recipes</h2>
     </div>
     <main id="main">
-      <article>
-        <h3>Test Recipe #1</h3>
-        <a href="#recipe"><button>Jump to Recipe</button></a>
-        <div class="blog-post">
-          <p>Look mom no hands!</p>
-          <!--TODO: replace with a read more button that takes you to a new page just for the recipe-->
-          <!--layout on recipe page should be mostly the same-->
-          <p>I'm some text. Aren't I wonderful?</p>
-          <p>The written word can be so inspiring. It can also be incredibly ridiculous. It's all up to you. &lt;3</p>
-          <p>I'm on the internet!</p>
-          <p>I have 1013 hours on The Sims 4. I don't even like it all that much.</p>
-          <p>I could have just copied a lorem ipsum from somewhere, but this is more fun.</p>
-          <p>Does VSCode have a ipsum shortcut? You'd think it would...</p>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque beatae officia minus quas aliquam! Numquam doloremque fugit aut ex harum optio. Hic maiores temporibus doloribus illo, quod optio dolores laboriosam.</p>
-          <p>Guess who found the lorem ipsum shortcut.</p>
-        </div>
-        <div class="recipe" id="recipe">
-          <div class="ingredients">
-            <h4>Ingredients</h4>
-            <ul>
-              <li>Intruder alert! A red spy is in the base!</li>
-              <li>A red spy is in the base?</li>
-              <li>hut hut hut hut hut</li>
-              <li>Protect the briefcase!</li>
-              <li>We need to protect the briefcase!</li>
-              <li>Yo, a little help here?</li>
-              <li>Alright, alright, I got it</li>
-            </ul>
-          </div>
-          <div class="steps">
-            <h4>Directions</h4>
-            <ol>
-              <li>Stand back son</li>
-              <li>1</li>
-              <li>1</li>
-              <li>1</li>
-              <li>uhh</li>
-              <li>1</li>
-            </ol>
-          </div>
-        </div>
-      </article>
       <form class="recipe-box" id="recipeForm">
         <h3>Submit Your Recipe!</h3>
-        <div><label for="recipe-title">Title:</label> <input id="recipe-title" name="recipe-title" type="text"></div>
-        <div><label for="recipe-desc">Description:</label> <input id="recipe-desc" name="recipe-desc" type="text"></div>
-        <div><label for="recipe-prep-time">Prep Time:</label> <input id="recipe-prep-time" name="recipe-prep-time" type="number" required></div>
-        <div><label for="recipe-cook-time">Cook Time:</label> <input id="recipe-cook-time" name="recipe-cook-time" type="number" required></div>
-        <div id="ingredient-1"><label for="recipe-ingredient-1">Ingredient #1:</label> <input id="recipe-ingredient-1" name="recipe-ingredient-1" type="text" required> </div>
+        <div><label for="recipe-title">Title:</label> <input id="recipe-title" name="recipe-title" type="text" required></div>
+        <div><label for="recipe-skill">Difficulty:</label>   
+            <select id="recipe-skill" name="recipe-skill" required>
+              <option value="Very Easy">Very Easy</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+              <option value="Very Hard">Very Hard</option>
+              </select>
+        <div><label for="recipe-desc">Description:</label> <input id="recipe-desc" name="recipe-desc" type="text" required></div>
+        <div><label for="recipe-blog-post">Blog Post:</label> <input id="recipe-blog-post" name="recipe-blog-post" type="text"></div>
+        <div><label for="recipe-prep-time">Prep Time in Minutes:</label> <input id="recipe-prep-time" name="recipe-prep-time" type="number" required></div>
+        <div><label for="recipe-cook-time">Cook Time in Minutes:</label> <input id="recipe-cook-time" name="recipe-cook-time" type="number" required></div>
+        <div id="ingredient-1"><label for="recipe-ingredient-1">Ingredient #1:</label> <input id="recipe-ingredient-1" name="recipe-ingredient-1" type="text" required  placeholder="Remember to add measurements!"> </div>
         <button id="ingredient-btn">Add Another Ingredient</button><button id="ingredient-remover">Remove Previous Ingredient</button></button>
         <div id="steps-1"><label for="recipe-steps-1">Step 1:</label> <input id="recipe-steps-1" name="recipe-steps-1" type="text" required> </div>
         <button id="steps-btn">Add Another Step</button><button id="steps-remover">Remove Previous Step</button></button>

@@ -39,11 +39,8 @@ let newTitle = document.getElementById("recipe-title");
 let newDesc = document.getElementById("recipe-desc"); //recipe description
 let newPrepTime = document.getElementById("recipe-prep-time");
 let newCookTime = document.getElementById("recipe-cook-time");
-let newSkillLevel = document.getElementById("recipe-skill");
-let newPost = document.getElementById("recipe-blog-post");
 
 let main = document.getElementById("main");
-
 
 
 //these two I need for both the submission logic and the add/remove button logic. 
@@ -53,48 +50,39 @@ let stepsCount = 1;
 function recipeSubmit(){
   let totalTime = parseInt(newPrepTime.value) + parseInt(newCookTime.value);
   let currentIngredient;
-  let ingredientsArray = [""];
-  let stepsArray = [""];
   let currentStep;
   let submittedRecipes = localStorage.getItem("total-submitted");
-  let recipeArray = JSON.parse(localStorage.getItem('recipes')) || [];
   
   for(let i = 1; i <= ingredientCount; i++){
     currentIngredient = document.getElementById("recipe-ingredient-" + i);
     ingredientsArray[i] = currentIngredient.value;
+    ingredientsHTML += `<li>` + ingredientsArray[i] + `</li>`;
   }
   
   for(let i = 1; i <= stepsCount; i++){
     currentStep = document.getElementById("recipe-steps-" + i);
     stepsArray[i] = currentStep.value;
+    stepsHTML += `<li>` + stepsArray[i] + `</li>`;
   }
   
   if(submittedRecipes == null){
-    submittedRecipes = 0;
+    submittedRecipes = 1;
   }
   else{
     submittedRecipes++;
   }
   
+  
   //add it all to local storage
-  let newRecipe = {
-    title : newTitle.value,
-    description : newDesc.value,
-    post : newPost.value,
-    difficulty : newSkillLevel.value,
-    prepTime : newPrepTime.value,
-    cookTime : newCookTime.value,
-    totalTime : totalTime,
-    ingredients : ingredientsArray,
-    steps : stepsArray
-  }
-  
-  recipeArray[submittedRecipes] = newRecipe;
-  
+  localStorage.setItem("title" + submittedRecipes, newTitle.value);
+  localStorage.setItem("description" + submittedRecipes, newDesc.value);
+  localStorage.setItem("difficulty" + submittedRecipes, 1);
+  localStorage.setItem("prep-time" + submittedRecipes, newPrepTime.value);
+  localStorage.setItem("cook-time" + submittedRecipes, newCookTime.value);
+  localStorage.setItem("total-time" + submittedRecipes, totalTime);
+  localStorage.setItem("ingredients" + submittedRecipes, ingredientsArray);
+  localStorage.setItem("steps" + submittedRecipes, stepsArray);
   localStorage.setItem("total-submitted", submittedRecipes);
-  localStorage.setItem("recipes", JSON.stringify(recipeArray));
-  
-
   
 }
 
@@ -102,27 +90,20 @@ function recipeSubmit(){
  * Grabs submitted recipes from localstorage on load
 */
 window.addEventListener("load", () => {
-
-  let recipeArray = JSON.parse(localStorage.getItem('recipes'));
-  let summaryHTML = ``
-  try{
-    for(let i = localStorage.getItem("total-submitted"); i >= 0; i--){
-      summaryHTML += `
-      <article>
-      <h3>${recipeArray[i].title}</h3>
-      <p>${recipeArray[i].description}</p>
-      <a href="#recipe-${i}"><button>Jump to Recipe</button></a>
-      <p><b>Skill Level:</b> ${recipeArray[i].difficulty}</p>
-      <div class="blog-post">
-      <a target="_blank" href="./recipe.html"><button id="new-tab-button-${i}" onclick="requestRecipe(${i})">View Recipe</button></a>
-      </article>`
-    }
-  }
-  catch(error){
-    summaryHTML = `<p>An unexpected error occurred.</p>`
-  }
-  finally{
+  
+  for(let i = 1; i <= localStorage.getItem("total-submitted"); i++){
+    let summaryHTML = `
+    <article>
+    <h3>${localStorage.getItem("title" + i)}</h3>
+    <a href="#recipe-${i}"><button>Jump to Recipe</button></a>
+    <div class="blog-post">
+    <p>${localStorage.getItem("description" + i)}</p>
+    <a target="_blank" href="./recipe.html"><button id="new-tab-button-${i}" onclick="requestRecipe(${i})">View Recipe</button></a>
+    </article>`
+    
+    
     main.insertAdjacentHTML("afterbegin", summaryHTML);
+    
   }
 });
 

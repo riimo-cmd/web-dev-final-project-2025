@@ -9,6 +9,11 @@
     --white: rgb(255, 252, 250);
     --orange:rgba(255, 154, 85, .9);
     --yellow:rgba(254, 236, 138, .45);
+    --green: rgb(92, 145, 59);
+    --dark-green: rgb(64, 92, 47);
+    --off-white: rgb(244, 237, 232);
+    --dark-peach: rgb(255, 190, 93);
+    --darker-peach: rgb(249, 168, 47);
 }
 
 body{
@@ -34,6 +39,7 @@ h2{
 
 h3{
     font-size: 1.5em;
+    margin-top: 0;
 }
 
 header{
@@ -75,7 +81,7 @@ nav li a{
     grid-column: 1/3;
     display:block;
     height: 4em;
-    margin: 1em 0;
+    margin: 1em .75em;
     padding: 0 1em;
     
 }
@@ -85,26 +91,34 @@ button, #recipe-submit, #newsletter-submit{
     border: 0;
     border-radius: 2em;
     color: var(--white);
-    padding: .75em;
+    padding: .5em .75em;
     font-family:  "Josefin Sans", Ariel, sans-serif;
     font-weight: bold;
-    font-size: .9em;
+    font-size: .75em;
+    box-shadow: .125em .125em .25em var(--off-white);
 }
 
 form button, #recipe-submit, #newsletter-submit{
     background-color: var(--orange);
     padding: .5em .75em;
     font-size: .75em;
-    font-weight: normal;
+    font-weight: 500;
     margin: .5em;
+    box-shadow: .125em .125em .25em var(--darker-peach);
 }
+
+
 
 main{
     grid-row: 4/5;
     grid-column: 1/2;
     padding: .75em;
+    padding-top: 0;
 }
 
+main hr{
+    width: clamp(40ch, 76%, 75ch);
+}
 
 aside{
     grid-row: 4/5;
@@ -115,6 +129,7 @@ footer{
     grid-row: 5/6;
     grid-column: 1/3;
     float:bottom;
+    margin-top: .5em;
 }
 
 footer p{
@@ -147,15 +162,19 @@ nav li a{
 
 .newsletter{
     background: var(--peach);
-    padding: .5em 0;
+    padding: .5em;
+    border-radius: 2em;
+    box-shadow: .125em .125em .125em var(--off-white);
 }
 
 form h3, form p{
     text-align: center;
+    margin-top: .75em;
 }
 
-#newsletter-submit{
+#newsletter-submit, #recipe-submit{
     display: block;
+    width: fit-content;
     margin: .25em auto;
 }
 
@@ -167,7 +186,30 @@ form h3, form p{
     background: var(--peach);
     border-radius: 2em;
     padding: .5em 1em;
+    width: clamp(40ch, 50%, 75ch);
     margin: 0 auto;
+    box-shadow: .125em .125em .125em var(--off-white);
+}
+
+input, select{
+    margin: .150em 0;
+    margin-bottom: .5em;
+    border: none;
+    border-radius: .25em;
+    background-color: var(--white);
+    font-family: "Josefin Sans", Ariel, sans-serif;
+    box-shadow: .125em .125em .125em var(--orange);
+    width: 100%;
+    height: 1.5em;
+}
+
+input:hover, input:active, input:focus{
+    border-bottom: .125em solid var(--green);
+    margin-bottom: .375em;
+}
+
+label{
+    font-weight: bold;
 }
 
 p, ul, li {
@@ -177,4 +219,50 @@ p, ul, li {
     /*width: clamp(40ch, 20%, 75ch);*/
     font-size: 1em;
     margin: .75em 0;
+}
+
+article{
+    margin: 1em 0;
+    margin-top: 0;
+    padding-bottom: 1em;
+    width: clamp(40ch, 75%, 75ch);
+}
+
+hr{
+    border-top: .5em dotted var(--orange);
+    margin: 1.5em .25em;
+}
+
+a{
+    color: var(--green);
+}
+
+a:visited{
+    color: var(--dark-green);
+}
+
+a:hover, a:active{
+    color: var(--orange);
+}
+
+#latest{
+    background: var(--yellow);
+    padding: 1em 1.5em;
+    border-radius: 2em;
+    box-shadow: .125em .125em .125em var(--off-white);
+}
+
+#latest h4{
+    margin: 0 0 .5em 0;
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+#latest h3{
+    margin-bottom: .5em;
+}
+
+#latest button{
+    background: var(--orange);
+    box-shadow: .125em .125em .25em var(--dark-peach);
 }

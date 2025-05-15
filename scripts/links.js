@@ -6,6 +6,7 @@ let footer = document.getElementById("footer");
 
 /*link variables*/
 let home = "./index.html";
+let latest = "./index.html#latest";
 
 /*HTML to insert*/
 let headerContent = `<img src="../images/orange.png" alt="Dreamcicle Recipes" id="logo">
@@ -13,19 +14,19 @@ let headerContent = `<img src="../images/orange.png" alt="Dreamcicle Recipes" id
         <nav id="navbar">
             <ul>
                 <li><a href="${home}">Home</a></li>
-                <li><a href="${home}">Home</a></li>
-                <li><a href="${home}">Home</a></li>
-                <li><a href="${home}">Home</a></li>
+                <li>About</li>
+                <li><a href="${latest}">Latest</a></li>
+                <li>Contact</li>
             </ul>
         </nav>`;
 let footerContent = `<ul>
-        <li><a href="${home}">About</a></li>
-        <li><a href="${home}">Blog</a></li>
-        <li><a href="${home}">Sitemap</a></li>
-        <li><a href="${home}">Newsletter</a></li>
-        <li><a href="${home}">Contact</a></li>
+        <li>About</li>
+        <li>Blog</li>
+        <li>Sitemap</li>
+        <li><a href="./index.html#newsletter">Newsletter</a></li>
+        <li>Contact</li>
       </ul>
-      <p>copyright goes here</p>`;
+      `; //<p>copyright goes here</p>
       
 /*Insert html*/
 header.insertAdjacentHTML("afterbegin", headerContent);

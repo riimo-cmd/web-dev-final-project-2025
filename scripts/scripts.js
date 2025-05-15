@@ -24,8 +24,8 @@ newsletterSubmitBtn.addEventListener("click", () => {
   
   let welcomeTemplate = `<h3>Thanks for subscribing ${firstName}!</h3><p>A confirmation email will be sent to ${email} soon. Make sure to check your spam folder if you can't find it - sometimes letters get lost!`;
   
-  localStorage.setItem("name", firstName.value);
-  localStorage.setItem("email", firstName.value);
+  localStorage.setItem("name", firstName);
+  localStorage.setItem("email", email);
     newsletter.innerHTML = "";
     newsletter.insertAdjacentHTML("beforeend", welcomeTemplate);
 });
@@ -33,11 +33,6 @@ newsletterSubmitBtn.addEventListener("click", () => {
 if(firstName != null && email != null) {
   newsletter.innerHTML = `<h3>Looks like you're subscribed!</h3><p>Make sure to keep an eye on your email for all our delicious recipes.</p>`;
 }
-
-
-/** TODO: Custom object
- * review chapter 8
-*/
 
 let recipeSubmitBtn = document.getElementById("recipe-submit");
 let newTitle = document.getElementById("recipe-title");
@@ -48,60 +43,75 @@ let newCookTime = document.getElementById("recipe-cook-time");
 let main = document.getElementById("main");
 
 
-let submittedRecipes = 0;
-
 //these two I need for both the submission logic and the add/remove button logic. 
 let ingredientCount = 1;
 let stepsCount = 1;
 
 function recipeSubmit(){
-    let totalTime = parseInt(newPrepTime.value) + parseInt(newCookTime.value);
-    let ingredientsList = ``;
-    let currentIngredient;
-    let stepsList = ``;
-    let currentStep;
-
-    for(let i = 1; i <= ingredientCount; i++){
-      currentIngredient = document.getElementById("recipe-ingredient-" + i);
-      ingredientsList += `<li>` + currentIngredient.value + `</li>`;
-    }
-
-    for(let i = 1; i <= stepsCount; i++){
-      currentStep = document.getElementById("recipe-steps-" + i);
-      stepsList += `<li>` + currentStep.value + `</li>`;
-    }
-    
-    let recipeHTML = `
-    <article>
-        <h3>${newTitle.value}</h3>
-        <a href="#recipe-${submittedRecipes}"><button>Jump to Recipe</button></a>
-        <div class="blog-post">
-        <p>${newDesc.value}</p>
-        <p><b>Prep Time:</b> ${newPrepTime.value} minutes</p>
-        <p><b>Cook Time:</b> ${newCookTime.value} minutes</p>
-        <p><b>Total:</b> ${totalTime} minutes</p>
-        </div>
-        <div class="recipe" id="recipe-${submittedRecipes}">
-          <div class="ingredients">
-            <h4>Ingredients</h4>
-            <ul>
-              ${ingredientsList}
-            </ul>
-          </div>
-          <div class="steps">
-            <h4>Directions</h4>
-            <ol>
-              ${stepsList}
-            </ol>
-          </div>
-        </div>
-      </article>`;
-
-    main.insertAdjacentHTML("afterbegin", recipeHTML);
+  let totalTime = parseInt(newPrepTime.value) + parseInt(newCookTime.value);
+  let currentIngredient;
+  let currentStep;
+  let submittedRecipes = localStorage.getItem("total-submitted");
+  
+  for(let i = 1; i <= ingredientCount; i++){
+    currentIngredient = document.getElementById("recipe-ingredient-" + i);
+    ingredientsArray[i] = currentIngredient.value;
+    ingredientsHTML += `<li>` + ingredientsArray[i] + `</li>`;
+  }
+  
+  for(let i = 1; i <= stepsCount; i++){
+    currentStep = document.getElementById("recipe-steps-" + i);
+    stepsArray[i] = currentStep.value;
+    stepsHTML += `<li>` + stepsArray[i] + `</li>`;
+  }
+  
+  if(submittedRecipes == null){
+    submittedRecipes = 1;
+  }
+  else{
     submittedRecipes++;
-
-
+  }
+  
+  
+  //add it all to local storage
+  localStorage.setItem("title" + submittedRecipes, newTitle.value);
+  localStorage.setItem("description" + submittedRecipes, newDesc.value);
+  localStorage.setItem("difficulty" + submittedRecipes, 1);
+  localStorage.setItem("prep-time" + submittedRecipes, newPrepTime.value);
+  localStorage.setItem("cook-time" + submittedRecipes, newCookTime.value);
+  localStorage.setItem("total-time" + submittedRecipes, totalTime);
+  localStorage.setItem("ingredients" + submittedRecipes, ingredientsArray);
+  localStorage.setItem("steps" + submittedRecipes, stepsArray);
+  localStorage.setItem("total-submitted", submittedRecipes);
+  
 }
+
+/**
+ * Grabs submitted recipes from localstorage on load
+*/
+window.addEventListener("load", () => {
+  
+  for(let i = 1; i <= localStorage.getItem("total-submitted"); i++){
+    let summaryHTML = `
+    <article>
+    <h3>${localStorage.getItem("title" + i)}</h3>
+    <a href="#recipe-${i}"><button>Jump to Recipe</button></a>
+    <div class="blog-post">
+    <p>${localStorage.getItem("description" + i)}</p>
+    <a target="_blank" href="./recipe.html"><button id="new-tab-button-${i}" onclick="requestRecipe(${i})">View Recipe</button></a>
+    </article>`
+    
+    
+    main.insertAdjacentHTML("afterbegin", summaryHTML);
+    
+  }
+});
+
+//separate function because the full recipe button wouldn't work otherwise
+function requestRecipe(number){
+  localStorage.setItem("requested-recipe", number);
+}
+
 
 recipeSubmitBtn.addEventListener("click", recipeSubmit);
 
@@ -117,37 +127,37 @@ function addIngredientButton() {
   
   let ingredientError = document.getElementById("ingredient-error-msg");
   if (ingredientError != null){
-      ingredientError.innerHTML = ``;
-    }
+    ingredientError.innerHTML = ``;
+  }
   ingredientCount++;
-    let newIngredientDiv = document.getElementById("ingredient-" + ingredientCount);
-    let ingredientTemplate = `<label for="recipe-ingredient-${ingredientCount}">Ingredient #${ingredientCount}:</label> <input id="recipe-ingredient-${ingredientCount}" name="recipe-ingredient-${ingredientCount}" type="text" required>`;
-    if (newIngredientDiv != null){
-      newIngredientDiv.insertAdjacentHTML("afterbegin", ingredientTemplate);
-    }
-    else {
-      ingredientBtn.insertAdjacentHTML("beforebegin", `<div id="ingredient-${ingredientCount}">` + ingredientTemplate + `</div>`);
-    }
-    
+  let newIngredientDiv = document.getElementById("ingredient-" + ingredientCount);
+  let ingredientTemplate = `<label for="recipe-ingredient-${ingredientCount}">Ingredient #${ingredientCount}:</label> <input id="recipe-ingredient-${ingredientCount}" name="recipe-ingredient-${ingredientCount}" type="text" required>`;
+  if (newIngredientDiv != null){
+    newIngredientDiv.insertAdjacentHTML("afterbegin", ingredientTemplate);
+  }
+  else {
+    ingredientBtn.insertAdjacentHTML("beforebegin", `<div id="ingredient-${ingredientCount}">` + ingredientTemplate + `</div>`);
+  }
+  
 }
 
 ingredientRemove.addEventListener("click", () => {
-    try{
-      let toRemove = document.getElementById("ingredient-" + ingredientCount);
-      toRemove.innerHTML = ""
-      ingredientCount--;
-    }
-    catch(typeError){
-      addIngredientButton();
-      ingredientRemove.insertAdjacentHTML("afterend", ingredientErrorMsg);
-    }
+  try{
+    let toRemove = document.getElementById("ingredient-" + ingredientCount);
+    toRemove.innerHTML = ""
+    ingredientCount--;
+  }
+  catch(typeError){
+    addIngredientButton();
+    ingredientRemove.insertAdjacentHTML("afterend", ingredientErrorMsg);
+  }
 });
 
 /** logic for the directions
  *  it's the same as the ingredients, just with some changed names
  *  I could probably consolidate them
  *  probably won't though
- */
+*/
 let stepsBtn = document.getElementById("steps-btn");
 let stepsRemove = document.getElementById("steps-remover");
 let stepsErrorMsg = `<p id="steps-error-msg">A recipe has to have steps!</p>`;
@@ -157,30 +167,32 @@ function addStepsButton() {
   
   let stepsError = document.getElementById("steps-error-msg");
   if (stepsError != null){
-      stepsError.innerHTML = ``;
-    }
+    stepsError.innerHTML = ``;
+  }
   stepsCount++;
-    let newStepsDiv = document.getElementById("steps-" + stepsCount);
-    let stepsTemplate = `<label for="recipe-steps-${stepsCount}">Step ${stepsCount}:</label> <input id="recipe-steps-${stepsCount}" name="steps-ingredient-${stepsCount}" type="text" required>`;
-    if (newStepsDiv != null){
-      newStepsDiv.insertAdjacentHTML("afterbegin", stepsTemplate);
-    }
-    else {
-      stepsBtn.insertAdjacentHTML("beforebegin", `<div id="steps-${stepsCount}">` + stepsTemplate + `</div>`);
-    }
-    
+  let newStepsDiv = document.getElementById("steps-" + stepsCount);
+  let stepsTemplate = `<label for="recipe-steps-${stepsCount}">Step ${stepsCount}:</label> <input id="recipe-steps-${stepsCount}" name="steps-ingredient-${stepsCount}" type="text" required>`;
+  if (newStepsDiv != null){
+    newStepsDiv.insertAdjacentHTML("afterbegin", stepsTemplate);
+  }
+  else {
+    stepsBtn.insertAdjacentHTML("beforebegin", `<div id="steps-${stepsCount}">` + stepsTemplate + `</div>`);
+  }
+  
 }
 
 stepsRemove.addEventListener("click", () => {
-    try{
-      let toRemove = document.getElementById("steps-" + stepsCount);
-      toRemove.innerHTML = ""
-      stepsCount--;
-    }
-    catch(typeError){
-      addStepsButton();
-      stepsRemove.insertAdjacentHTML("afterend", stepsErrorMsg);
-    }
+  try{
+    let toRemove = document.getElementById("steps-" + stepsCount);
+    toRemove.innerHTML = ""
+    stepsCount--;
+  }
+  catch(typeError){
+    addStepsButton();
+    stepsRemove.insertAdjacentHTML("afterend", stepsErrorMsg);
+  }
 });
+
+
 
 

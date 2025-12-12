@@ -1,5 +1,8 @@
 
 
+// Name: Katie Dustin
+// Project: Final Project Spring 2025 - Recipe Blog
+
 
 /**
  * Logic for opening the recipe in a new tab

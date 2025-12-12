@@ -1,5 +1,8 @@
 
 
+// Name: Katie Dustin
+// Project: Final Project Spring 2025 - Recipe Blog
+
 /*get elements*/ 
 let header = document.getElementById("header");
 let footer = document.getElementById("footer");

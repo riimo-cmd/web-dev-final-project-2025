@@ -1,5 +1,8 @@
 
 
+// Name: Katie Dustin
+// Project: Final Project Spring 2025 - Recipe Blog
+
 //get elements needed for the newsletter inputs
 let firstNameBox = document.getElementById("name");
 let emailBox = document.getElementById("newsletter-email");

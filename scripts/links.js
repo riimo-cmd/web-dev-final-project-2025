@@ -12,7 +12,7 @@ let home = "./index.html";
 let latest = "./index.html#latest";
 
 /*HTML to insert*/
-let headerContent = `<img src="../images/orange.png" alt="Dreamcicle Recipes" id="logo">
+let headerContent = `<img src="./images/orange.png" alt="Dreamcicle Recipes" id="logo">
         <h1>Dreamcicle Recipes</h1>
         <nav id="navbar">
             <ul>
